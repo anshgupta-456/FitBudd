@@ -80,15 +80,16 @@ This AI-powered fitness app is designed to break common barriers in digital fitn
 
 **Mac/Linux:**
 ```bash
-# Make scripts executable (first time only)
-chmod +x start-*.sh
+## Terminal 1 - Backend
+cd backend
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python run.py
 
-# Start both servers at once
-./start-all.sh
-
-# OR start them separately:
-./start-backend.sh    # Terminal 1
-./start-frontend.sh    # Terminal 2
+# Terminal 2 - Frontend
+npm install
+npm run dev
 ```
 
 #### Option 2: Manual Setup
