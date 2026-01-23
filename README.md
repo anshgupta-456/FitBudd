@@ -21,37 +21,31 @@ This AI-powered fitness app is designed to break common barriers in digital fitn
 
 👤 User Profile - Manage your personal fitness profile  
 
-![ss7](https://github.com/NISHANT-GUPTA1/Fitness_Health_Monitoring_AI/blob/289d9f6fcee79ae83ff904cc67a3f4a7c2a630c8/public/images/Screenshot%202025-07-06%20174307.png)
+
 
 
 🌍 Internationalization - Multi-language support  
 
-![ss8](https://github.com/NISHANT-GUPTA1/Fitness_Health_Monitoring_AI/blob/3c4e748ed0c7d61dd5b09ea0b823de45759ca728/public/images/image.png)
+
 
 🏋 Workout Planner - Create personalized workout routines  
 
-![ss1](https://github.com/user-attachments/assets/da0e9c58-91f3-4f1b-97b6-69ec4ff9416d)
 
 
 📊 Fitness Tracker - Monitor your progress and fitness metrics  
 
-![ss2](https://github.com/user-attachments/assets/e166a4fd-1d47-4da4-b742-0bd77d56b24b)
 
 🏃 Daily Exercises - Track daily exercise activities 
 
-![ss3](https://github.com/user-attachments/assets/3ce409fb-0782-452e-b868-4bc5a216d948)
 
 🧘 Posture Checker - AI-powered posture analysis  
 
-![ss4](https://github.com/NISHANT-GUPTA1/Fitness_Health_Monitoring_AI/blob/61ee8096585d7e0e437a656cb8fc4656fb4f00a2/public/images/Screenshot%202025-07-06%20174603.png)
 
 🤝 Partner Finder - Find workout partners in your area  
 
-![ss5](https://github.com/user-attachments/assets/c9e584f7-0699-47ff-88df-8cfda9a4e77f)
 
 💪 Gym Machine Guide - Learn how to use gym equipment properly  
 
-![ss6](https://github.com/user-attachments/assets/04bd67eb-d922-4181-a8d3-0f2aa4fd6bbb)
 
 
 ## Tech Stack
