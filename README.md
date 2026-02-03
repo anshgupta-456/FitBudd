@@ -41,7 +41,7 @@ This AI-powered fitness app is designed to break common barriers in digital fitn
 🧘 Posture Checker - AI-powered posture analysis  
 
 
-🤝 Partner Finder - Find workout partners in your area  
+🤝 Partner Finder - Find workout partners in your area . 
 
 
 💪 Gym Machine Guide - Learn how to use gym equipment properly  
