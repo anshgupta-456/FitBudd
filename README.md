@@ -24,7 +24,7 @@ This AI-powered fitness app is designed to break common barriers in digital fitn
 
 
 
-🌍 Internationalization - Multi-language support  
+🌍 Internationalization -- Multi-language support  
 
 
 
