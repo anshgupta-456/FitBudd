@@ -19,9 +19,9 @@ if __name__ == '__main__':
     print("API Documentation available at: http://localhost:5001/")
     print("Press Ctrl+C to stop the server")
     
-    # Run the Flask app
+    debug = os.environ.get('FLASK_DEBUG', 'false').lower() in ('1', 'true', 'yes')
     app.run(
-        debug=True,
+        debug=debug,
         host='0.0.0.0',
         port=port,
         threaded=True
