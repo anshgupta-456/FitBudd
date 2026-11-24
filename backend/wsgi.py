@@ -1,3 +1,5 @@
-from app import app
+"""Production entry point: gunicorn wsgi:app"""
 
-__all__ = ["app"]
+from fitbudd import create_app
+
+app = create_app()

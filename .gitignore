@@ -1,51 +1,34 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
+# Node
 /node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# next.js
 /.next/
 /out/
-
-# production
-/build
-/dist
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-.pnpm-debug.log*
-
-# local env files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# vercel
-.vercel
-
-# netlify
-.netlify
-
-# typescript
 *.tsbuildinfo
 next-env.d.ts
+npm-debug.log*
 
-# IDE
-.vscode/settings.json
+# Python
+backend/.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local database (recreated and seeded on first run)
+backend/instance/
+*.db
+
+# Env files (see .env.example)
+.env
+.env.*
+!.env.example
+
+# Hosting CLIs
+.vercel
+.netlify
+
+# Editors and tools
+.vscode/
 .idea/
-
-# OS
+.claude/
+.DS_Store
 Thumbs.db
