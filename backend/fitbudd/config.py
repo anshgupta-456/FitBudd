@@ -1,4 +1,5 @@
 import os
+import re
 from datetime import timedelta
 from pathlib import Path
 
@@ -15,10 +16,29 @@ def _database_url() -> str:
     return url
 
 
-def _origins() -> list[str]:
-    raw = os.environ.get("FRONTEND_URL", "")
-    origins = [o.strip().rstrip("/") for o in raw.split(",") if o.strip()]
-    return origins + ["http://localhost:3000", "http://127.0.0.1:3000"]
+LOCAL_ORIGINS = ["http://localhost:3000", "http://127.0.0.1:3000"]
+
+
+def parse_origins(raw: str) -> str | list[str | re.Pattern]:
+    """Which browser origins may call the API, from FRONTEND_URL.
+
+    Unset means any origin. That's safe for this API because sign-in is a bearer token the
+    frontend adds by hand; browsers never attach it on their own the way they do cookies, so
+    another site can't make requests as a signed-in member. Set FRONTEND_URL to lock it down
+    anyway. Entries are comma-separated and may use * as a wildcard, e.g.
+    https://fitbudd.vercel.app,https://fit-budd-*.vercel.app for production plus previews.
+    """
+    entries = [o.strip().rstrip("/") for o in raw.split(",") if o.strip()]
+    if not entries:
+        return "*"
+    origins: list[str | re.Pattern] = []
+    for entry in entries:
+        if "*" in entry:
+            pattern = "^" + re.escape(entry).replace(r"\*", "[^/]*") + "$"
+            origins.append(re.compile(pattern, re.IGNORECASE))
+        else:
+            origins.append(entry)
+    return origins + LOCAL_ORIGINS
 
 
 class Config:
@@ -32,7 +52,7 @@ class Config:
     APP_TIMEZONE = os.environ.get("APP_TIMEZONE", "Asia/Kolkata")
     # How far ahead the recurring class and court timetable is kept filled.
     TIMETABLE_DAYS = 14
-    CORS_ORIGINS = _origins()
+    CORS_ORIGINS = parse_origins(os.environ.get("FRONTEND_URL", ""))
     # Fill an empty database with the sample gyms, classes and trainers on startup.
     SEED_ON_START = os.environ.get("SEED_ON_START", "true").lower() in ("1", "true", "yes")
     TESTING = False

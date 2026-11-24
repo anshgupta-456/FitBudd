@@ -134,8 +134,10 @@ every member-owned record is looked up through the signed-in member, never an id
 
 The repo is set up for **Vercel** (web) and **Render** (API).
 
-- **Render**: create a Blueprint from `render.yaml`. It generates `SECRET_KEY`; set `FRONTEND_URL` to your
-  Vercel URL so CORS allows it.
+- **Render**: create a Blueprint from `render.yaml`. It generates `SECRET_KEY`. `FRONTEND_URL` is optional:
+  leave it empty to accept requests from any site (safe, since sign-in is a bearer token rather than a cookie),
+  or list the sites allowed to call the API, comma-separated, with `*` for Vercel's preview URLs, e.g.
+  `https://your-app.vercel.app,https://your-app-*.vercel.app`.
 - **Vercel**: import the repo and set `NEXT_PUBLIC_API_BASE` to the Render URL.
 
 On Render's free plan the disk is wiped on every deploy and restart, so the SQLite database resets to the
