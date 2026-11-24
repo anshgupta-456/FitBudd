@@ -1,29 +1,17 @@
-#!/usr/bin/env python3
-"""
-FitSanskriti Backend Server
-Run this script to start the Flask backend server
+"""Local development server.
+
+    python run.py
+
+Uses the development config (a throwaway secret key and a SQLite file in
+backend/instance/), so no environment variables are needed.
 """
 
 import os
-import sys
-from app import app, init_db
 
-if __name__ == '__main__':
-    # Initialize database
-    init_db()
-    
-    # Get port from environment variable or use default
-    port = int(os.environ.get('PORT', 5001))
-    
-    print(f"Starting FitSanskriti Backend Server on port {port}")
-    print("API Documentation available at: http://localhost:5001/")
-    print("Press Ctrl+C to stop the server")
-    
-    debug = os.environ.get('FLASK_DEBUG', 'false').lower() in ('1', 'true', 'yes')
-    app.run(
-        debug=debug,
-        host='0.0.0.0',
-        port=port,
-        threaded=True
-    )
+from fitbudd import create_app
 
+app = create_app(os.environ.get("FITBUDD_ENV", "development"))
+
+if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5001))
+    app.run(host="127.0.0.1", port=port, debug=os.environ.get("FLASK_DEBUG", "1") == "1")

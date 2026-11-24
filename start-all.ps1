@@ -1,22 +1,21 @@
-# PowerShell script to start both backend and frontend
-# Usage: .\start-all.ps1
+# Start the API and the web app for local development (Windows PowerShell).
+#   .\start-all.ps1
+# First run creates backend\.venv and installs dependencies for both halves.
 
-Write-Host "Starting FitSanskriti Application..." -ForegroundColor Cyan
-Write-Host "=====================================" -ForegroundColor Cyan
+$ErrorActionPreference = "Stop"
+$root = $PSScriptRoot
 
-# Start backend in a new PowerShell window
-Write-Host "`nStarting Backend Server in new window..." -ForegroundColor Yellow
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PWD'; .\start-backend.ps1"
+if (-not (Test-Path "$root\backend\.venv")) {
+    Write-Host "Creating backend virtualenv..."
+    python -m venv "$root\backend\.venv"
+    & "$root\backend\.venv\Scripts\python.exe" -m pip install -r "$root\backend\requirements-dev.txt"
+}
+if (-not (Test-Path "$root\node_modules")) {
+    Write-Host "Installing web dependencies..."
+    Push-Location $root; npm install; Pop-Location
+}
 
-# Wait a bit for backend to start
-Start-Sleep -Seconds 3
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "Set-Location '$root\backend'; .\.venv\Scripts\python.exe run.py"
+Start-Process powershell -ArgumentList "-NoExit", "-Command", "Set-Location '$root'; npm run dev"
 
-# Start frontend in a new PowerShell window
-Write-Host "Starting Frontend Server in new window..." -ForegroundColor Yellow
-Start-Process powershell -ArgumentList "-NoExit", "-Command", "cd '$PWD'; .\start-frontend.ps1"
-
-Write-Host "`nBoth servers are starting in separate windows." -ForegroundColor Green
-Write-Host "Backend: http://localhost:5001" -ForegroundColor Cyan
-Write-Host "Frontend: http://localhost:3000" -ForegroundColor Cyan
-Write-Host "`nPress any key to exit this window (servers will continue running)..." -ForegroundColor Yellow
-$null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+Write-Host "API: http://localhost:5001   Web: http://localhost:3000"
